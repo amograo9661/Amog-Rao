@@ -5,7 +5,6 @@ import {
   Github, 
   Linkedin, 
   Mail, 
-  Camera, 
   GraduationCap, 
   Sparkles, 
   FileText, 
@@ -17,17 +16,15 @@ import { PERSONAL_INFO } from '../data/portfolioData';
 interface HeroSectionProps {
   onOpenContact: () => void;
   onOpenResume: () => void;
-  onOpenPhotoModal: () => void;
   onOpenCal?: () => void;
-  avatarUrl: string;
+  avatarUrl?: string;
 }
 
 export const HeroSection: React.FC<HeroSectionProps> = ({
   onOpenContact,
   onOpenResume,
-  onOpenPhotoModal,
   onOpenCal,
-  avatarUrl,
+  avatarUrl = PERSONAL_INFO.defaultAvatar,
 }) => {
   return (
     <section 
@@ -45,26 +42,17 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
           
           {/* LEFT COLUMN: Photo + Open To Work Badge + Quick Actions */}
           <div className="lg:col-span-5 flex flex-col items-center text-center">
-            {/* Profile Photo with Interactive Hover & Change button */}
-            <div className="relative group mb-3">
-              <div className="w-36 h-36 sm:w-44 sm:h-44 md:w-48 md:h-48 lg:w-48 lg:h-48 xl:w-52 xl:h-52 rounded-2xl sm:rounded-3xl overflow-hidden shadow-xl border-3 border-neutral-700/80 bg-neutral-900 ring-1 ring-white/10 transition-transform duration-300 group-hover:scale-[1.02]">
+            {/* Profile Photo */}
+            <div className="relative mb-3">
+              <div className="w-36 h-36 sm:w-44 sm:h-44 md:w-48 md:h-48 lg:w-48 lg:h-48 xl:w-52 xl:h-52 rounded-full overflow-hidden shadow-2xl border-3 border-neutral-700/80 bg-neutral-900 ring-1 ring-white/10 transition-transform duration-300 hover:scale-[1.02]">
                 <img 
-                  src={avatarUrl} 
+                  src={avatarUrl || PERSONAL_INFO.defaultAvatar} 
                   alt={PERSONAL_INFO.name}
-                  className="w-full h-full object-cover object-top"
+                  className="w-full h-full object-cover object-center"
                   loading="eager"
+                  referrerPolicy="no-referrer"
                 />
               </div>
-
-              {/* Photo Change Action Overlay Button */}
-              <button
-                onClick={onOpenPhotoModal}
-                title="Change or upload profile photo"
-                className="absolute bottom-2 right-2 p-2 rounded-xl bg-neutral-900/90 text-white shadow-md hover:bg-neutral-800 transition-all transform hover:scale-105 active:scale-95 flex items-center gap-1.5 text-[11px] font-semibold backdrop-blur-sm border border-white/10"
-              >
-                <Camera className="w-3 h-3 text-white" />
-                <span className="hidden sm:inline">Change</span>
-              </button>
             </div>
 
             {/* Open to Work Badge */}

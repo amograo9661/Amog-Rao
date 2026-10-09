@@ -13,7 +13,6 @@ import { ContactSection } from './components/ContactSection';
 import { Footer } from './components/Footer';
 import { ProjectModal } from './components/ProjectModal';
 import { ResumeModal } from './components/ResumeModal';
-import { PhotoUploadModal } from './components/PhotoUploadModal';
 import { CalModal } from './components/CalModal';
 import { StarryBackground } from './components/StarryBackground';
 import { PERSONAL_INFO } from './data/portfolioData';
@@ -22,32 +21,16 @@ import { Project } from './types';
 export default function App() {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [resumeOpen, setResumeOpen] = useState(false);
-  const [photoModalOpen, setPhotoModalOpen] = useState(false);
   const [calModalOpen, setCalModalOpen] = useState(false);
-  
-  // Persistent avatar in localStorage so changes survive page reloads and browser sessions
-  const [avatarUrl, setAvatarUrl] = useState<string>(() => {
-    try {
-      const saved = localStorage.getItem('amog_portfolio_profile_photo');
-      if (saved && saved.trim()) {
-        return saved;
-      }
-    } catch (e) {
-      console.warn('Unable to read saved photo from localStorage', e);
-    }
-    return PERSONAL_INFO.defaultAvatar;
-  });
 
-  const handleSaveAvatar = (newUrl: string) => {
-    setAvatarUrl(newUrl);
+  // Clear any legacy custom photo overrides so only Amog's authentic photo is displayed
+  React.useEffect(() => {
     try {
-      if (newUrl) {
-        localStorage.setItem('amog_portfolio_profile_photo', newUrl);
-      }
-    } catch (e) {
-      console.warn('Unable to save photo to localStorage', e);
+      localStorage.removeItem('amog_portfolio_profile_photo');
+    } catch {
+      // ignore
     }
-  };
+  }, []);
 
   const handleOpenContact = () => {
     const contactSection = document.getElementById('contact');
@@ -67,7 +50,7 @@ export default function App() {
           onOpenContact={handleOpenContact}
           onOpenResume={() => setResumeOpen(true)}
           onOpenCal={() => setCalModalOpen(true)}
-          avatarUrl={avatarUrl}
+          avatarUrl={PERSONAL_INFO.defaultAvatar}
         />
 
       {/* Main Content Area */}
@@ -76,9 +59,8 @@ export default function App() {
         <HeroSection 
           onOpenContact={handleOpenContact}
           onOpenResume={() => setResumeOpen(true)}
-          onOpenPhotoModal={() => setPhotoModalOpen(true)}
           onOpenCal={() => setCalModalOpen(true)}
-          avatarUrl={avatarUrl}
+          avatarUrl={PERSONAL_INFO.defaultAvatar}
         />
 
         {/* 2. Page 2 / Skills & Technical Capabilities Section */}
@@ -115,13 +97,6 @@ export default function App() {
       <ResumeModal 
         isOpen={resumeOpen} 
         onClose={() => setResumeOpen(false)} 
-      />
-
-      <PhotoUploadModal 
-        isOpen={photoModalOpen} 
-        onClose={() => setPhotoModalOpen(false)} 
-        currentAvatar={avatarUrl}
-        onSaveAvatar={handleSaveAvatar}
       />
 
       {/* Cal.com Scheduling Modal */}

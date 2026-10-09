@@ -493,7 +493,7 @@ ${RESUME_DATA.careerInterests.join(' | ')}
                     <img 
                       src={PERSONAL_INFO.defaultAvatar} 
                       alt="Amog Rao" 
-                      className="w-14 h-14 rounded-2xl object-cover object-[center_22%] border border-neutral-700"
+                      className="w-14 h-14 rounded-full object-cover object-center border border-neutral-700"
                     />
                     <div>
                       <h2 className="text-lg font-bold text-white">{RESUME_DATA.header.fullName}</h2>

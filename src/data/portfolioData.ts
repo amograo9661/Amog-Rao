@@ -1,5 +1,4 @@
 import { ExperienceItem, Project, ServiceItem } from '../types';
-import originalPhotoImg from '../assets/images/amog_original_photo.jpg';
 import sankalpLogoImg from '../assets/images/sankalp_logo_1787416978436.jpg';
 import rideSharingImg from '../assets/images/ride_sharing_mockup_1787401060031.jpg';
 import tutorFinderImg from '../assets/images/tutor_finder_mockup_1787401081928.jpg';
@@ -22,8 +21,8 @@ export const PERSONAL_INFO = {
   linkedinUsername: "amog-rao-b14332285",
   linkedinDisplayName: "Amog Rao",
   availability: "Available for Internships & Full-Time Software Roles",
-  defaultAvatar: originalPhotoImg,
-  fullPhoto: originalPhotoImg,
+  defaultAvatar: '/images/profile.jpg',
+  fullPhoto: '/images/profile.jpg',
   headline: "Building modern web applications, reliable APIs, and intelligent systems.",
   intro: "Hi, I'm Amog Rao — a passionate Computer Science student at KL University specializing in AI & Autonomous Systems. I build responsive web applications, secure full-stack solutions, and robust APIs with Java, Spring Boot, React, and SQL.",
   bio: "Computer Science student specializing in AI for Autonomous Systems with hands-on experience in Full Stack Development, Java, Spring Boot, React.js, and SQL databases. Strong foundation in DSA, OOP, and DBMS with experience in building scalable REST APIs and testing user interfaces.",

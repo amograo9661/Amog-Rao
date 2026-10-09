@@ -6,10 +6,15 @@ interface NavbarProps {
   onOpenContact: () => void;
   onOpenResume: () => void;
   onOpenCal?: () => void;
-  avatarUrl: string;
+  avatarUrl?: string;
 }
 
-export const Navbar: React.FC<NavbarProps> = ({ onOpenContact, onOpenResume, onOpenCal, avatarUrl }) => {
+export const Navbar: React.FC<NavbarProps> = ({ 
+  onOpenContact, 
+  onOpenResume, 
+  onOpenCal, 
+  avatarUrl = PERSONAL_INFO.defaultAvatar 
+}) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -61,7 +66,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenContact, onOpenResume, onO
             <img 
               src={avatarUrl} 
               alt={PERSONAL_INFO.name} 
-              className="w-full h-full object-cover object-[center_22%]"
+              className="w-full h-full object-cover object-center"
               referrerPolicy="no-referrer"
             />
           </div>
